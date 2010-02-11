@@ -52,6 +52,7 @@
 		F2140CBC1124C29300AAADFE /* word_list.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140CBB1124C29300AAADFE /* word_list.rb */; };
 		F2140CBF1124C2E500AAADFE /* player.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140CBE1124C2E500AAADFE /* player.rb */; };
 		F2140CC21124C32C00AAADFE /* game.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140CC11124C32C00AAADFE /* game.rb */; };
+		F2140CC61124CB4600AAADFE /* ospd3.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2140CC51124CB4600AAADFE /* ospd3.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +84,7 @@
 		F2140CBB1124C29300AAADFE /* word_list.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = word_list.rb; sourceTree = "<group>"; };
 		F2140CBE1124C2E500AAADFE /* player.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = player.rb; sourceTree = "<group>"; };
 		F2140CC11124C32C00AAADFE /* game.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = game.rb; sourceTree = "<group>"; };
+		F2140CC51124CB4600AAADFE /* ospd3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ospd3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		29B97314FDCFA39411CA2CEA /* TextTwistClone */ = {
 			isa = PBXGroup;
 			children = (
+				F2140CC41124CB3C00AAADFE /* Wordlists */,
 				172754AE1075979200D0347B /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -183,6 +186,14 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2140CC41124CB3C00AAADFE /* Wordlists */ = {
+			isa = PBXGroup;
+			children = (
+				F2140CC51124CB4600AAADFE /* ospd3.txt */,
+			);
+			name = Wordlists;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +249,7 @@
 				F2140CBC1124C29300AAADFE /* word_list.rb in Resources */,
 				F2140CBF1124C2E500AAADFE /* player.rb in Resources */,
 				F2140CC21124C32C00AAADFE /* game.rb in Resources */,
+				F2140CC61124CB4600AAADFE /* ospd3.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
