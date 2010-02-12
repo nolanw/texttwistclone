@@ -53,6 +53,7 @@
 		F2140CBF1124C2E500AAADFE /* player.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140CBE1124C2E500AAADFE /* player.rb */; };
 		F2140CC21124C32C00AAADFE /* game.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140CC11124C32C00AAADFE /* game.rb */; };
 		F2140CC61124CB4600AAADFE /* ospd3.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2140CC51124CB4600AAADFE /* ospd3.txt */; };
+		F2140D131124E45F00AAADFE /* game_window_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2140D121124E45F00AAADFE /* game_window_controller.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,7 @@
 		F2140CC51124CB4600AAADFE /* ospd3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ospd3.txt; sourceTree = "<group>"; };
 		F2140CC91124D0F700AAADFE /* word_list_test.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = word_list_test.rb; sourceTree = "<group>"; };
 		F2140CFC1124DCF000AAADFE /* player_test.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = player_test.rb; sourceTree = "<group>"; };
+		F2140D121124E45F00AAADFE /* game_window_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = game_window_controller.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				F2140CBB1124C29300AAADFE /* word_list.rb */,
 				F2140CBE1124C2E500AAADFE /* player.rb */,
 				F2140CC11124C32C00AAADFE /* game.rb */,
+				F2140D121124E45F00AAADFE /* game_window_controller.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				F2140CBF1124C2E500AAADFE /* player.rb in Resources */,
 				F2140CC21124C32C00AAADFE /* game.rb in Resources */,
 				F2140CC61124CB4600AAADFE /* ospd3.txt in Resources */,
+				F2140D131124E45F00AAADFE /* game_window_controller.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
