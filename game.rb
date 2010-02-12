@@ -8,7 +8,7 @@
 # particular word list, knows the current seven-letter words, and scores words.
 
 class Game
-  attr_accessor :letters
+  attr_reader :letters
   
   # Expects a Hash of options, which can include:
   #   - :dictionary => name of a built-in dictionary (if symbol)
@@ -22,9 +22,9 @@ class Game
   def initialize(options)
     if options[:dictionary]
       if options[:dictionary].kind_of? Symbol
-        @word_list = WordList.new(NSBundle.mainBundle.pathForResource(options[:dictionary], ofType:'txt'))
+        @word_list = WordList.loadWithPath NSBundle.mainBundle.pathForResource(options[:dictionary], ofType:'txt')
       else
-        @word_list = WordList.new options[:dictionary]
+        @word_list = WordList.loadWithPath options[:dictionary]
       end
     else
       @word_list = nil
@@ -32,12 +32,22 @@ class Game
   end
   
   def score_for(str)
-    return 0 unless defined? @letters
-    return 0 unless @word_list.is_word?(str) and str.is_anagram_of?(@letters)
-    10 * str.length
+    if not @word_list.is_word? str
+      raise Exception, "#{str} not a word"
+    elsif not str.is_anagram_of? @letters
+      raise Exception, "#{str} not an anagram of #{@letters}"
+    end
+    if not defined? @letters
+      0
+    elsif @word_list.is_word? str and str.is_anagram_of? @letters
+      10 * str.length
+    else
+      0
+    end
   end
   
-  def new_round
-    setLetters @word_list.random_seven_letter_word.split(//).sort.join
+  def new_round(str = nil)
+    str = @word_list.random_word_of_length(7) unless str
+    @letters = str.split(//).sort.join
   end
 end

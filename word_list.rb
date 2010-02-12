@@ -8,9 +8,12 @@
 # therefrom, retrieving a list of anagrams given a string, and validating 
 # whether a given string is a word.
 
-class Array
+class Set
   def any
-    self[rand(size)]
+    r = rand(size)
+    each_with_index do |x, i|
+      return x if i == r
+    end
   end
 end
 
@@ -39,7 +42,11 @@ class String
 end
 
 module WordUtilities
-  # Puts all the anagrams of str into the list words  
+  # Generate all same-length anagrams of str, appending them to words.
+  # Example:
+  # WordUtilities.anagrams('art', w = [])
+  # p w
+  # => ["art", "atr", "rat", "rta", "tar", "tra"]
   def self.anagrams(str, words, anagram='')
     if str.empty?
       words << anagram
@@ -53,25 +60,44 @@ module WordUtilities
   end
 end
 
+require 'set'
+
+# A list of words with fast insert/lookup.
 class WordList
-  def initialize(path)
-    @words = Hash.new { |hash, key| hash[key] = [] }
+  def initialize
+    @words = Hash.new { |hash, key| hash[key] = Set.new }
+  end
+  
+  def <<(word)
+    @words[word.length] << word
+  end
+  
+  # Return a new WordList with the contents of the file at path, which has 
+  # one word per line.
+  def self.loadWithPath(path)
+    list = self.new
     File.open(path).each do |word|
-      word = word.strip.downcase
-      @words[word.length] << word
+      list << word.strip.downcase
     end
-  end
-  
-  def random_seven_letter_word
-    @words[7].any
-  end
-  
-  def anagrammed_words(str)
-    WordUtilities.anagrams(str, words = [])
-    words.select { |word| is_word? word }
+    list
   end
   
   def is_word?(str)
-    @words[str.length].member? str.downcase
+    @words[str.length].member? str
+  end
+  
+  alias :member? :is_word?
+  
+  def random_word_of_length(len)
+    @words[len].any
+  end
+  
+  def anagrammed_words(str)
+    WordUtilities.anagrams str, w = []
+    w.select { |word| is_word? word }
+  end
+  
+  def clear
+    @words.clear
   end
 end

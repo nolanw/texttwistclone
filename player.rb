@@ -8,15 +8,24 @@
 # it's a valid word), and handles player metadata (e.g. name).
 
 class Player
-  attr_accessor :score
+  attr_reader :score
   
   def initialize(game)
     @game = game
     @score = 0
+    @guessed = WordList.new
   end
   
   def entered(str)
-    setScore(@score + @game.score_for(str))
+    word_score = @game.score_for str
+    if word_score > 0 and not @guessed.member? str
+      @guessed << str
+      @score += word_score
+    end
     @score
+  end
+  
+  def clear_words_guessed
+    @guessed.clear
   end
 end

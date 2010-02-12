@@ -11,12 +11,19 @@ require 'set'
 
 class WordListTest < Test::Unit::TestCase
   def setup
-    @words = WordList.new 'ospd3.txt'
+    @words = WordList.loadWithPath 'ospd3.txt'
+  end
+  
+  def test_append
+    list = WordList.new
+    assert !list.is_word?('foo'), "Expected empty WordList not to know 'foo'."
+    list << 'foo'
+    assert list.is_word?('foo'), "Expected WordList with 'foo' to know 'foo'."
   end
   
   def test_random_seven_letter_word
     10.times do
-      word = @words.random_seven_letter_word
+      word = @words.random_word_of_length 7
       assert_equal 7, word.length, "Expected '#{word}' to be length 7"
     end
   end
