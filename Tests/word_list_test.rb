@@ -6,21 +6,23 @@
 
 
 require 'test/unit'
-
 require 'word_list'
 
-framework 'Foundation'
-
-class SimpleTest < Test::Unit::TestCase
-  # def setup
-  #   puts 'setup called'
-  # end
-  # 
-  # def teardown
-  #   puts 'teardown called'
-  # end
-  # 
-  def test_load_from_file
-    assert WordList.new('ospd3.txt')
+class WordListTest < Test::Unit::TestCase
+  def setup
+    @words = WordList.new 'ospd3.txt'
+  end
+  
+  def test_seven_letter_word
+    10.times do
+      word = @words.randomSevenLetterWord
+      assert_equal word.length, 7, "Expected '#{word}' to be length 7."
+    end
+  end
+  
+  def test_valid_words
+    %w[boy fob lax pod axle tweak twice mildew mildly enforce].each do |word|
+      assert @words.is_word?(word), "Expected '#{word}' to be valid."
+    end
   end
 end
