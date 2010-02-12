@@ -14,8 +14,22 @@ class Array
   end
 end
 
+module WordUtilities
+  # Puts all the anagrams of str into the list words  
+  def anagrams(str, words, anagram='')
+    if str.empty?
+      words << anagram
+    end
+    str.length.times do |index|
+      # Inspiration from:
+      # http://lojic.com/blog/2007/10/22/solving-anagrams-in-ruby
+      char = (temp = str.clone).slice!(index)
+      anagrams(temp, words, anagram + char)
+    end
+  end
+end
+
 class WordList
-  
   def initialize(path)
     @words = Hash.new { |hash, key| hash[key] = [] }
     File.open(path).each do |word|
@@ -26,19 +40,6 @@ class WordList
   
   def randomSevenLetterWord
     @words[7].any
-  end
-  
-  # Puts all the anagrams of str into the list words  
-  def anagrams(str, words, anagram='')
-    if str.empty?
-      words << anagram
-    end
-    str.length.times do |index|
-      char = (temp = str.clone).slice!(index)
-      # Inspiration from:
-      # http://lojic.com/blog/2007/10/22/solving-anagrams-in-ruby/
-      anagrams(temp, words, anagram + char)
-    end
   end
   
   def is_word?(str)
