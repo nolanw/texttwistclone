@@ -42,6 +42,11 @@ class WordList
     @words[7].any
   end
   
+  def anagrammed_words(str)
+    WordUtilities.anagrams(str, words = [])
+    words.select { |word| is_word? word }
+  end
+  
   def is_word?(str)
     @words[str.length].member? str.downcase
   end

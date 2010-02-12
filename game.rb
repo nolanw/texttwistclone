@@ -5,7 +5,7 @@
 # Copyright 2010 Nolan Waite. All rights reserved.
 # 
 # Keeps a list of players, knows the type of game being played, uses a 
-# particular word list, and scores words.
+# particular word list, knows the current seven-letter words, and scores words.
 
 class Game
   # Expects a Hash of options, which can include:

@@ -7,6 +7,7 @@
 
 require 'test/unit'
 require 'word_list'
+require 'set'
 
 class WordListTest < Test::Unit::TestCase
   def setup
@@ -16,7 +17,7 @@ class WordListTest < Test::Unit::TestCase
   def test_seven_letter_word
     10.times do
       word = @words.randomSevenLetterWord
-      assert_equal word.length, 7, "Expected '#{word}' to be length 7"
+      assert_equal 7, word.length, "Expected '#{word}' to be length 7"
     end
   end
   
@@ -38,5 +39,10 @@ class WordListTest < Test::Unit::TestCase
     %w[the teh hte het eth eht].each do |word|
       assert words.member?(word), "Expected '#{word}' to be an angram of '#{test_string}'"
     end
+  end
+  
+  def test_anagrammed_words
+    anagrams = Set.new %w[tar rat art]
+    assert_equal anagrams, Set.new(@words.anagrammed_words('tar'))
   end
 end
