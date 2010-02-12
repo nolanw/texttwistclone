@@ -74,7 +74,7 @@ class WordList
   
   # Return a new WordList with the contents of the file at path, which has 
   # one word per line.
-  def self.loadWithPath(path)
+  def self.load_with_path(path)
     list = self.new
     File.open(path).each do |word|
       list << word.strip.downcase

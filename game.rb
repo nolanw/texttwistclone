@@ -22,9 +22,9 @@ class Game
   def initialize(options)
     if options[:dictionary]
       if options[:dictionary].kind_of? Symbol
-        @word_list = WordList.loadWithPath NSBundle.mainBundle.pathForResource(options[:dictionary], ofType:'txt')
+        @word_list = WordList.load_with_path NSBundle.mainBundle.pathForResource(options[:dictionary], ofType:'txt')
       else
-        @word_list = WordList.loadWithPath options[:dictionary]
+        @word_list = WordList.load_with_path options[:dictionary]
       end
     else
       @word_list = nil

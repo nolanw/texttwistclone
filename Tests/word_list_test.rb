@@ -11,7 +11,7 @@ require 'set'
 
 class WordListTest < Test::Unit::TestCase
   def setup
-    @words = WordList.loadWithPath 'ospd3.txt'
+    @words = WordList.load_with_path 'ospd3.txt'
   end
   
   def test_append
