@@ -27,7 +27,15 @@ class WordList
     @words[7].any
   end
   
-  def anagrams(str)
+  # Puts all the anagrams of str into the list words  
+  def anagrams(str, words, anagram='')
+    if str.empty?
+      words << anagram
+    end
+    str.length.times do |index|
+      char = (temp = str.clone).slice!(index)
+      anagrams(temp, words, anagram + char)
+    end
   end
   
   def is_word?(str)
