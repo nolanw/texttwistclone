@@ -9,7 +9,7 @@
 # whether a given string is a word.
 
 class Array
-  def rand
+  def any
     self[rand(size)]
   end
 end
