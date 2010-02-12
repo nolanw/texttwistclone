@@ -31,4 +31,8 @@ class WordListTest < Test::Unit::TestCase
       assert !@words.is_word?(word), "Expected '#{word}' to be invalid"
     end
   end
+  
+  def test_anagrams
+    test_string = 'the'
+    @words.anagrams
 end

@@ -15,6 +15,7 @@ class Array
 end
 
 class WordList
+  
   def initialize(path)
     @words = Hash.new { |hash, key| hash[key] = [] }
     File.open(path).each do |word|
@@ -34,6 +35,8 @@ class WordList
     end
     str.length.times do |index|
       char = (temp = str.clone).slice!(index)
+      # Inspiration from:
+      # http://lojic.com/blog/2007/10/22/solving-anagrams-in-ruby/
       anagrams(temp, words, anagram + char)
     end
   end
