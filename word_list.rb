@@ -14,6 +14,30 @@ class Array
   end
 end
 
+class String
+  # A hash where keys are letters and values are the number of instances 
+  # of said letter in self.
+  def letter_count
+    letters = Hash.new { |hash, key| hash[key] = 0 }
+    split(//).each { |c| letters[c] += 1 }
+    letters
+  end
+  
+  # Examples:
+  # 'art'.is_anagram_of? 'rat'
+  # => true
+  # 'art'.is_anagram_of? 'tarp'
+  # => true
+  # 'the'.is_anagram_of? 'fat'
+  # => false
+  def is_anagram_of?(other)
+    me = letter_count
+    other = other.letter_count
+    me.each_key { |k| return false unless other[k] and other[k] >= me[k] }
+    true
+  end
+end
+
 module WordUtilities
   # Puts all the anagrams of str into the list words  
   def self.anagrams(str, words, anagram='')
@@ -38,7 +62,7 @@ class WordList
     end
   end
   
-  def randomSevenLetterWord
+  def random_seven_letter_word
     @words[7].any
   end
   

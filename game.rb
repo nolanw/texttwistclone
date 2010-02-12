@@ -8,6 +8,8 @@
 # particular word list, knows the current seven-letter words, and scores words.
 
 class Game
+  attr_accessor :letters
+  
   # Expects a Hash of options, which can include:
   #   - :dictionary => name of a built-in dictionary (if symbol)
   #                    path to some other deictionary (if not symbol)
@@ -30,7 +32,11 @@ class Game
   end
   
   def score_for(str)
-    return 0 unless @word_list.is_word? str
+    return 0 unless @word_list.is_word?(str) and str.is_anagram_of?(@letters)
     10 * str.length
+  end
+  
+  def new_round
+    setLetters @word_list.random_seven_letter_word.split(//).sort.join
   end
 end

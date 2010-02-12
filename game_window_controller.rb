@@ -7,7 +7,7 @@
 
 class GameWindowController < NSWindowController
   attr_reader :game, :player
-  attr_writer :score
+  attr_writer :score, :letters
   
   def initWithWindow(window)
     @game = Game.new :dictionary => :ospd3
@@ -18,5 +18,10 @@ class GameWindowController < NSWindowController
   def enterString(sender)
     @player.entered(sender.stringValue)
     @score.integerValue = @player.score
+  end
+  
+  def newRound(sender)
+    @game.new_round
+    @letters.stringValue = @game.letters
   end
 end

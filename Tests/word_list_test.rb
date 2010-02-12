@@ -14,9 +14,9 @@ class WordListTest < Test::Unit::TestCase
     @words = WordList.new 'ospd3.txt'
   end
   
-  def test_seven_letter_word
+  def test_random_seven_letter_word
     10.times do
-      word = @words.randomSevenLetterWord
+      word = @words.random_seven_letter_word
       assert_equal 7, word.length, "Expected '#{word}' to be length 7"
     end
   end
@@ -44,5 +44,11 @@ class WordListTest < Test::Unit::TestCase
   def test_anagrammed_words
     anagrams = Set.new %w[tar rat art]
     assert_equal anagrams, Set.new(@words.anagrammed_words('tar'))
+  end
+  
+  def test_is_anagram_of?
+    assert 'art'.is_anagram_of?('rat'), "Expected 'art' to be an anagram of 'rat'"
+    assert 'art'.is_anagram_of?('tarp'), "Expected 'art' to be an anagram of 'tarp'"
+    assert !'the'.is_anagram_of?('fat'), "Expected 'the' not to be an anagram of 'fat'"
   end
 end
