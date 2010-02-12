@@ -8,5 +8,14 @@
 # it's a valid word), and handles player metadata (e.g. name).
 
 class Player
+  attr_reader :score
   
+  def initialize(game)
+    @game = game
+    @score = 0
+  end
+  
+  def entered(str)
+    @score += @game.score_for(str)
+  end
 end
