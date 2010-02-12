@@ -8,6 +8,28 @@
 # therefrom, retrieving a list of anagrams given a string, and validating 
 # whether a given string is a word.
 
+class Array
+  def rand
+    self[rand(size)]
+  end
+end
+
 class WordList
+  def initialize(path)
+    @words = Hash.new { |hash, key| hash[key] = [] }
+    File.open(path).each do |word|
+      @words[word.size] << word
+    end
+  end
   
+  def randomSevenLetterWord
+    @words[7].any
+  end
+  
+  def anagrams(str)
+  end
+  
+  def is_word?(str)
+    @words[str.length].member? str
+  end
 end
