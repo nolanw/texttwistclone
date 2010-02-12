@@ -16,7 +16,7 @@ end
 
 module WordUtilities
   # Puts all the anagrams of str into the list words  
-  def anagrams(str, words, anagram='')
+  def self.anagrams(str, words, anagram='')
     if str.empty?
       words << anagram
     end

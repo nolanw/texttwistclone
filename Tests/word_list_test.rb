@@ -34,5 +34,9 @@ class WordListTest < Test::Unit::TestCase
   
   def test_anagrams
     test_string = 'the'
-    @words.anagrams
+    WordUtilities.anagrams(test_string, words=[])
+    %w[the teh hte het eth eht].each do |word|
+      assert words.member?(word), "Expected '#{word}' to be an angram of '#{test_string}'"
+    end
+  end
 end
