@@ -18,7 +18,8 @@ class WordList
   def initialize(path)
     @words = Hash.new { |hash, key| hash[key] = [] }
     File.open(path).each do |word|
-      @words[word.size] << word
+      word = word.strip.downcase
+      @words[word.length] << word
     end
   end
   
@@ -30,6 +31,6 @@ class WordList
   end
   
   def is_word?(str)
-    @words[str.length].member? str
+    @words[str.length].member? str.downcase
   end
 end
