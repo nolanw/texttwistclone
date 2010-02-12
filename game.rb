@@ -32,6 +32,7 @@ class Game
   end
   
   def score_for(str)
+    return 0 unless defined? @letters
     return 0 unless @word_list.is_word?(str) and str.is_anagram_of?(@letters)
     10 * str.length
   end
