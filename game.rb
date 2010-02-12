@@ -32,11 +32,6 @@ class Game
   end
   
   def score_for(str)
-    if not @word_list.is_word? str
-      raise Exception, "#{str} not a word"
-    elsif not str.is_anagram_of? @letters
-      raise Exception, "#{str} not an anagram of #{@letters}"
-    end
     if not defined? @letters
       0
     elsif @word_list.is_word? str and str.is_anagram_of? @letters
