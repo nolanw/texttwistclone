@@ -42,22 +42,29 @@ class String
 end
 
 module WordUtilities
+  # Generate all same-length anagrams of str.
+  def self.anagrams(str)
+    anagrams_helper(str, w = [])
+    w
+  end
+  
   # Generate all same-length anagrams of str, appending them to words.
   # Example:
-  # WordUtilities.anagrams('art', w = [])
+  # WordUtilities.anagrams_helper('art', w = [])
   # p w
   # => ["art", "atr", "rat", "rta", "tar", "tra"]
-  def self.anagrams(str, words, anagram='')
-    if str.empty?
-      words << anagram
+  private
+    def self.anagrams_helper(str, words, anagram='')
+      if str.empty?
+        words << anagram
+      end
+      str.length.times do |index|
+        # Inspiration from:
+        # http://lojic.com/blog/2007/10/22/solving-anagrams-in-ruby
+        char = (temp = str.clone).slice!(index)
+        anagrams_helper(temp, words, anagram + char)
+      end
     end
-    str.length.times do |index|
-      # Inspiration from:
-      # http://lojic.com/blog/2007/10/22/solving-anagrams-in-ruby
-      char = (temp = str.clone).slice!(index)
-      anagrams(temp, words, anagram + char)
-    end
-  end
 end
 
 require 'set'
@@ -93,8 +100,7 @@ class WordList
   end
   
   def anagrammed_words(str)
-    WordUtilities.anagrams str, w = []
-    w.select { |word| is_word? word }
+    WordUtilities.anagrams(str).select { |word| is_word? word }
   end
   
   def clear
