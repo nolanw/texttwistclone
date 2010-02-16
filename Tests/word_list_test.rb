@@ -48,6 +48,18 @@ class WordListTest < Test::Unit::TestCase
     end
   end
   
+  def test_substrings_of_length
+    subs_two = 'the'.substrings_of_length(2).sort!
+    assert_equal %w[he te th], subs_two, "Unknown or incomplete 2-substrings of 'the': #{subs_two}"
+    subs_three = 'the'.substrings_of_length(3)
+    assert_equal ['the'], subs_three, "Expected ['the'] but got #{subs_three}"
+  end
+  
+  def test_substring_anagrammed_words
+    anagrams_then = @words.substring_anagrammed_words('then')
+    assert_equal %w[hen ten the then], anagrams_then.to_a.sort, "Expected hen, ten, the, then as anagrams of 'then', but got #{anagrams_then.to_a.sort}"
+  end
+  
   def test_anagrammed_words
     anagrams = Set.new %w[tar rat art]
     assert_equal anagrams, Set.new(@words.anagrammed_words('tar'))
@@ -64,5 +76,10 @@ class WordListTest < Test::Unit::TestCase
     assert_equal 5, words.size, "Expected there to be five words, but had #{words.size}"
     empty_words = WordList.new
     assert_equal 0, empty_words.size, "Expected there to be no words, but had #{empty_words.size}"
+  end
+  
+  def test_to_a
+    words = WordList.new << 'a' << 'be' << 'see'
+    assert_equal %w[a be see], words.to_a.sort!, "Expected a, be, see, but got #{words.to_a.sort}"
   end
 end

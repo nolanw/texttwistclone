@@ -39,6 +39,11 @@ class String
     me.each_key { |k| return false unless other[k] and other[k] >= me[k] }
     true
   end
+  
+  # Return an Array of all substrings of length len.
+  def substrings_of_length(len)
+    split(//).combination(len).collect { |a| a.join }
+  end
 end
 
 module WordUtilities
@@ -103,6 +108,17 @@ class WordList
     WordUtilities.anagrams(str).select { |word| is_word? word }
   end
   
+  # Return a WordList of anagrams of str of any length that are words.
+  def substring_anagrammed_words(str)
+    wl = WordList.new
+    (3..(str.size)).each do |len|
+      str.substrings_of_length(len).each do |sub|
+        wl << sub if is_word? sub
+      end
+    end
+    wl
+  end
+  
   def clear
     @words.clear
   end
@@ -113,5 +129,11 @@ class WordList
     else
       @words.values.reduce(:+)
     end
+  end
+  
+  def to_a
+    a = []
+    @words.each_value { |w| a.concat w.to_a}
+    a
   end
 end
