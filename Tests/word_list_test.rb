@@ -58,4 +58,11 @@ class WordListTest < Test::Unit::TestCase
     assert 'art'.is_anagram_of?('tarp'), "Expected 'art' to be an anagram of 'tarp'"
     assert !'the'.is_anagram_of?('fat'), "Expected 'the' not to be an anagram of 'fat'"
   end
+  
+  def test_size
+    words = WordList.new << 'one' << 'two' << 'three' << 'four' << 'five'
+    assert_equal 5, words.size, "Expected there to be five words, but had #{words.size}"
+    empty_words = WordList.new
+    assert_equal 0, empty_words.size, "Expected there to be no words, but had #{empty_words.size}"
+  end
 end

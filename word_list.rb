@@ -100,4 +100,12 @@ class WordList
   def clear
     @words.clear
   end
+  
+  def size
+    if @words.empty?
+      0
+    else
+      @words.values.reduce(:+)
+    end
+  end
 end
