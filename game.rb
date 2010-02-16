@@ -8,7 +8,7 @@
 # particular word list, knows the current seven-letter words, and scores words.
 
 class Game
-  attr_reader :letters
+  attr_reader :letters, :total_anagrams
   
   # Expects a Hash of options, which can include:
   #   - :dictionary => name of a built-in dictionary (if symbol)
@@ -44,5 +44,7 @@ class Game
   def new_round(str = nil)
     str = @word_list.random_word_of_length(7) unless str
     @letters = str.split(//).sort.join
+    @all_anagrams = @word_list.substring_anagrammed_words str
+    @total_anagrams = @all_anagrams.size
   end
 end

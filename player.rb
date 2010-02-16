@@ -8,7 +8,7 @@
 # it's a valid word), and handles player metadata (e.g. name).
 
 class Player
-  attr_reader :score
+  attr_reader :guessed, :score
   
   def initialize(game)
     @game = game

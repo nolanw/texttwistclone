@@ -127,7 +127,7 @@ class WordList
     if @words.empty?
       0
     else
-      @words.values.reduce(:+)
+      @words.values.inject(0) { |sum, s| sum + s.size }
     end
   end
   
