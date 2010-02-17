@@ -7,6 +7,8 @@
 # Keeps a list of players, knows the type of game being played, uses a 
 # particular word list, knows the current seven-letter words, and scores words.
 
+require 'word_list'
+
 class Game
   attr_reader :letters, :total_anagrams
   
