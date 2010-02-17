@@ -7,7 +7,8 @@
 
 class GameWindowController < NSWindowController
   attr_reader :game, :player
-  attr_writer :score, :letters, :total_anagrams, :anagrams_so_far
+  attr_writer :score, :letters
+  attr_accessor :wordDisplayArray
   
   def initWithWindow(window)
     @game = Game.new :dictionary => :ospd3
@@ -15,16 +16,26 @@ class GameWindowController < NSWindowController
     super
   end
   
+  def awakeFromNib
+    newRound self
+  end
+  
   def enterString(sender)
     @player.entered(sender.stringValue)
-    @score.integerValue = @player.score
-    @anagrams_so_far.integerValue = @player.guessed.size
+    @score.stringValue = "#{@player.score} points"
+    update_word_display_array
   end
   
   def newRound(sender)
     @game.new_round
     @letters.stringValue = @game.letters
-    @total_anagrams.integerValue = @game.total_anagrams
-    @anagrams_so_far.integerValue = 0
+    update_word_display_array
   end
+  
+  private
+    def update_word_display_array
+      setWordDisplayArray(@game.all_anagrams.to_a.collect do |a|
+        @player.guessed.member?(a) ? a : '_ ' * a.length
+      end.to_a)
+    end
 end

@@ -10,7 +10,7 @@
 require 'word_list'
 
 class Game
-  attr_reader :letters, :total_anagrams
+  attr_reader :letters, :all_anagrams
   
   # Expects a Hash of options, which can include:
   #   - :dictionary => name of a built-in dictionary (if symbol)
