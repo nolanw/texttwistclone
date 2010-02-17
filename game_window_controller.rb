@@ -7,8 +7,7 @@
 
 class GameWindowController < NSWindowController
   attr_reader :game, :player
-  attr_writer :score, :letters
-  attr_accessor :wordDisplayArray
+  attr_writer :score, :letters, :wordDisplayTable, :columnedWordDisplayer
   
   def initWithWindow(window)
     @game = Game.new :dictionary => :ospd3
@@ -34,8 +33,9 @@ class GameWindowController < NSWindowController
   
   private
     def update_word_display_array
-      setWordDisplayArray(@game.all_anagrams.to_a.collect do |a|
+      @columnedWordDisplayer.wordArray = (@game.all_anagrams.to_a.collect do |a|
         @player.guessed.member?(a) ? a : '_ ' * a.length
       end.to_a)
+      @wordDisplayTable.reloadData
     end
 end
