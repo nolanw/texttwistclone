@@ -82,6 +82,7 @@ class WordList
   
   def <<(word)
     @words[word.length] << word
+    self
   end
   
   # Return a new WordList with the contents of the file at path, which has 
@@ -132,8 +133,8 @@ class WordList
   end
   
   def to_a
-    a = []
-    @words.each_value { |w| a.concat w.to_a}
-    a
+    @words.keys.sort!.collect do |k| 
+      @words[k].to_a.sort!
+    end.flatten!
   end
 end

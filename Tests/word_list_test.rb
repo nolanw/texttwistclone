@@ -84,7 +84,7 @@ class WordListTest < Test::Unit::TestCase
   end
   
   def test_to_a
-    words = WordList.new << 'a' << 'be' << 'see'
-    assert_equal %w[a be see], words.to_a.sort!, "Expected a, be, see, but got #{words.to_a.sort}"
+    words = WordList.new << 'a' << 'be' << 'see' << 'hello'
+    assert_equal %w[a be see hello], words.to_a, "Unexpected ordering/elements in array version of word list"
   end
 end
