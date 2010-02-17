@@ -86,7 +86,6 @@
 		F2140CC11124C32C00AAADFE /* game.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = game.rb; sourceTree = "<group>"; };
 		F2140CC51124CB4600AAADFE /* ospd3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ospd3.txt; sourceTree = "<group>"; };
 		F2140CC91124D0F700AAADFE /* word_list_test.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = word_list_test.rb; sourceTree = "<group>"; };
-		F2140CFC1124DCF000AAADFE /* player_test.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = player_test.rb; sourceTree = "<group>"; };
 		F2140D121124E45F00AAADFE /* game_window_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = game_window_controller.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,7 +137,6 @@
 			children = (
 				17D55CD81076A1A2008207BD /* run_suite.rb */,
 				F2140CC91124D0F700AAADFE /* word_list_test.rb */,
-				F2140CFC1124DCF000AAADFE /* player_test.rb */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

@@ -42,7 +42,7 @@ class String
   
   # Return an Array of all substrings of length len.
   def substrings_of_length(len)
-    split(//).combination(len).collect { |a| a.join }
+    split(//).permutation(len).collect { |a| a.join }
   end
 end
 

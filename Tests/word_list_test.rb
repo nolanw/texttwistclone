@@ -44,20 +44,24 @@ class WordListTest < Test::Unit::TestCase
     test_string = 'the'
     words = WordUtilities.anagrams test_string
     %w[the teh hte het eth eht].each do |word|
-      assert words.member?(word), "Expected '#{word}' to be an angram of '#{test_string}'"
+      assert words.member?(word), "Expected '#{word}' to be an anagram of '#{test_string}'"
     end
   end
   
   def test_substrings_of_length
     subs_two = 'the'.substrings_of_length(2).sort!
-    assert_equal %w[he te th], subs_two, "Unknown or incomplete 2-substrings of 'the': #{subs_two}"
-    subs_three = 'the'.substrings_of_length(3)
-    assert_equal ['the'], subs_three, "Expected ['the'] but got #{subs_three}"
+    assert_equal %w[eh et he ht te th], subs_two, "Unknown or incomplete 2-substrings of 'the': #{subs_two}"
+    subs_three = 'the'.substrings_of_length(3).sort!
+    assert_equal %w[eht eth het hte teh the], subs_three, "Unexpected substrings of length 3 of 'the'"
+    subs_manured = 'manured'.substrings_of_length 4
+    assert subs_manured.member?('rude'), "Expected 'rude' to be a substring of length 4 of 'manured'"
   end
   
   def test_substring_anagrammed_words
     anagrams_then = @words.substring_anagrammed_words('then')
-    assert_equal %w[hen ten the then], anagrams_then.to_a.sort, "Expected hen, ten, the, then as anagrams of 'then', but got #{anagrams_then.to_a.sort}"
+    assert_equal %w[eth hen hent het net nth ten the then], anagrams_then.to_a.sort, "Unexpected word anagrams of 'then'"
+    anagrams_manured = @words.substring_anagrammed_words 'manured'
+    assert anagrams_manured.member?('rude'), "Expected 'rude' to be a word anagram of 'manured'"
   end
   
   def test_anagrammed_words
@@ -69,6 +73,7 @@ class WordListTest < Test::Unit::TestCase
     assert 'art'.is_anagram_of?('rat'), "Expected 'art' to be an anagram of 'rat'"
     assert 'art'.is_anagram_of?('tarp'), "Expected 'art' to be an anagram of 'tarp'"
     assert !'the'.is_anagram_of?('fat'), "Expected 'the' not to be an anagram of 'fat'"
+    assert 'rude'.is_anagram_of?('manured'), "Expected 'rude' to be an anagram of 'rude'"
   end
   
   def test_size
