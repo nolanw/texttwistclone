@@ -10,6 +10,7 @@
 
 class Set
   def any
+    return nil if empty?
     r = rand(size)
     each_with_index do |x, i|
       return x if i == r

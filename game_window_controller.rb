@@ -5,16 +5,18 @@
 # Copyright 2010 Nolan Waite. All rights reserved.
 
 
-class GameWindowController < NSWindowController
-  attr_writer :score, :letters, :wordDisplayTable, :columnedWordDisplayer
-  
-  def initWithWindow(window)
-    @game = Game.new
-    super
+class Fixnum
+  def pluralize
+    self == 1 ? '' : 's'
   end
+end
+
+
+class GameWindowController < NSWindowController
+  attr_writer :score, :letters, :wordDisplayTable, :columnedWordDisplayer, :timeRemaining, :newRoundGameTabs
   
   def awakeFromNib
-    newRound self
+    newGame self
   end
   
   def enterString(sender)
@@ -25,9 +27,39 @@ class GameWindowController < NSWindowController
   end
   
   def newRound(sender)
+    if defined? @timer and @timer
+      @timer.invalidate
+    end
     @game.new_round
     @letters.stringValue = @game.letters
+    @timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector:'tick:', userInfo:nil, repeats:true)
+    @seconds_left = 60
+    @newRoundGameTabs.selectTabViewItemWithIdentifier 'empty'
     update_word_display_array
+    update_time_remaining
+  end
+  
+  def tick(timer)
+    @seconds_left -= 1
+    if @seconds_left <= 0
+      @timer.invalidate
+      @timer = nil
+      if @game.end_round
+        @timeRemaining.stringValue = "You made it to the next round!"
+        @newRoundGameTabs.selectTabViewItemWithIdentifier 'next_round'
+      else
+        @timeRemaining.stringValue = "Game over."
+        @newRoundGameTabs.selectTabViewItemWithIdentifier 'new_game'
+      end
+    else
+      update_time_remaining
+    end
+  end
+  
+  def newGame(sender)
+    @game = Game.new
+    newRound self
+    @score.stringValue = "0 points"
   end
   
   private
@@ -36,5 +68,9 @@ class GameWindowController < NSWindowController
         @game.guessed.member?(a) ? a : '_ ' * a.length
       end.to_a)
       @wordDisplayTable.reloadData
+    end
+    
+    def update_time_remaining
+      @timeRemaining.stringValue = "#{@seconds_left} second#{@seconds_left.pluralize} remaining"
     end
 end

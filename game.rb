@@ -41,6 +41,10 @@ class Game
     end
   end
   
+  def end_round
+    !!@guessed.random_word_of_length(7)
+  end
+  
   private
     def load_dictionary(dictionary)
       bundle = NSBundle.mainBundle
