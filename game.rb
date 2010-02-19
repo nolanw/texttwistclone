@@ -1,52 +1,50 @@
 # game.rb
 # TextTwistClone
 #
-# Created by Nolan Waite on 10-02-11.
+# Created by Nolan Waite on 10-02-19.
 # Copyright 2010 Nolan Waite. All rights reserved.
-# 
-# Keeps a list of players, knows the type of game being played, uses a 
-# particular word list, knows the current seven-letter words, and scores words.
+
 
 require 'word_list'
 
 class Game
-  attr_reader :letters, :all_anagrams
+  attr_reader :all_anagrams, :guessed, :score, :letters
   
-  # Expects a Hash of options, which can include:
-  #   - :dictionary => name of a built-in dictionary (if symbol)
-  #                    path to some other deictionary (if not symbol)
-  #
-  # Examples:
-  # 
-  # Game.new :dictionary => 'ospd3.txt'
-  # Game.new :dictionary => :ospd3
-  #
-  def initialize(options)
-    if options[:dictionary]
-      if options[:dictionary].kind_of? Symbol
-        @word_list = WordList.load_with_path NSBundle.mainBundle.pathForResource(options[:dictionary], ofType:'txt')
-      else
-        @word_list = WordList.load_with_path options[:dictionary]
-      end
-    else
-      @word_list = nil
-    end
+  def initialize(options = {})
+    load_dictionary options.fetch(:dictionary, :ospd3)
+  end
+  
+  def new_round
+    @letters = @word_list.random_word_of_length(7).split(//).sort.join
+    @all_anagrams = @word_list.substring_anagrammed_words @letters
+    @guessed = WordList.new
+    @score ||= 0
   end
   
   def score_for(str)
-    if not defined? @letters
-      0
-    elsif @word_list.is_word? str and str.is_anagram_of? @letters
+    return 0 unless defined? @letters
+    if @word_list.is_word? str and str.is_anagram_of? @letters
       10 * str.length
     else
       0
     end
   end
   
-  def new_round(str = nil)
-    str = @word_list.random_word_of_length(7) unless str
-    @letters = str.split(//).sort.join
-    @all_anagrams = @word_list.substring_anagrammed_words str
-    @total_anagrams = @all_anagrams.size
+  def entered(str)
+    word_score = score_for str
+    if word_score > 0 and not @guessed.member? str
+      @guessed << str
+      @score += word_score
+      true
+    else
+      false
+    end
   end
+  
+  private
+    def load_dictionary(dictionary)
+      bundle = NSBundle.mainBundle
+      @word_list = WordList.load_with_path bundle.pathForResource(dictionary, ofType:'txt')
+      @word_list = WordList.load_with_path dictionary unless @word_list
+    end
 end
